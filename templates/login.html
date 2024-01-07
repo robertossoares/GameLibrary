@@ -1,0 +1,25 @@
+{% extends "template.html" %}
+{% block conteudo %}
+<form method="POST" action="{{ url_for('autenticar') }}">
+    <input type="hidden" name="proxima" value="{{ proxima or url_for('index') }}">
+    {{ form.csrf_token() }}
+
+    <div class="form-group">
+        {{ form.nickname.label(class='form-label') }}
+        {{ form.nickname(class='form-control') }}
+    </div>
+    <div class="form-group">
+        {{ form.senha.label(class='form-label') }}
+        {{ form.senha(class='form-control') }}
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center mt-4">
+        {{ form.login(class='btn btn-primary') }}
+        <div class="justify-content-between align-items-center ">
+            <label>Não possui cadastro?</label>
+            <a name="cadastrar" class="" href="{{ url_for('cadastro') }}" role="button">Cadastrar</a>
+        </div>
+    </div>
+
+</form>
+{% endblock %}

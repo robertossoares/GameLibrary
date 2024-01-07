@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Game Library</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='app.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul id="messages" class="list-unstyled">
+            {% for message in messages %}
+            <li class="alert alert-success">{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+
+        <div class="page-header d-flex justify-content-between align-items-center mb-2">
+            <h1>{{ titulo }}</h1>
+            <a name="{{ 'logout' if usuario_logado else 'login' }}" class="btn {{'btn-danger' if usuario_logado else 'btn-primary'}} "
+                href="{{ url_for('logout' if usuario_logado else 'login') }}" role="button" {{ 'hidden' if 'login' in
+                titulo.lower() else '' }}>{{ 'Logout' if usuario_logado else 'Login' }}</a>
+        </div>
+
+        {% block conteudo %}{% endblock %}
+
+        <script type="text/javascript" src="{{ url_for('static', filename='jquery.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='app.js') }}"></script>
+
+    </div>
+</body>
+
+</html>
